@@ -1,25 +1,19 @@
-import React from 'react';
-import { atom, useRecoilState } from 'recoil';
-
-const counterState = atom({
-  key: "counterState",
-  default: 1,
-})
+import { useRecoilState } from 'recoil'
+import { counterState } from './atomes/counter.atomes'
 
 function App() {
+ const [counter, setCounter] = useRecoilState(counterState)
 
-  const [counter, setCounter] = useRecoilState(counterState);
+ const increment = () => setCounter((oldValue) => ++oldValue)
 
-  return (
-    <div className="App">
-      <h1>
-         Hello World <br /> A simple counter made with Redux!
-      </h1>
-      <h3>Counter</h3>
-      <h3>{counter}</h3>
-      <button onClick={() => setCounter(counter + 1)}>Increase</button>
-    </div>
-  );
+ return (
+  <div className='Container'>
+   <h1> A simple counter made with Recoil!</h1>
+   <h3>Counter</h3>
+   <h3>{counter}</h3>
+   <button onClick={increment}>Increase</button>
+  </div>
+ )
 }
 
-export default App;
+export default App
